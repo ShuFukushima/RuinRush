@@ -1,6 +1,4 @@
-using System;
 using UnityEngine;
-using UnityEngine.InputSystem;
 
 public class PrototypeCarController : MonoBehaviour
 {
@@ -19,11 +17,41 @@ public class PrototypeCarController : MonoBehaviour
     [SerializeField] private WheelCollider _fL, _fR, _rL, _rR;  // 4輪分のWheelCollider
     [SerializeField] private Drive _drive;                      // 駆動方式を管理
 
+    [SerializeField] private PrototypeGameSession _gameSession; // 現在のゲーム進行情報を取得する
+
+    private void Start()
+    {
+        _gameSession = FindFirstObjectByType<PrototypeGameSession>();
+
+        // エラー処理
+        if (_gameSession == null)
+        {
+            Debug.LogError("PrototypeGameSessionが見つかりません。");
+        }
+    }
+
 
     private void Update()
     {
-        Driving();
-        Braking();
+        // ゲームセッション側の進行情報を基に、操作するかを判定
+        if(_gameSession.GetIsPlaying() == true)
+        {
+            Driving();
+            Braking();
+        }
+        else
+        {
+            _fL.motorTorque = 0f;
+            _fR.motorTorque = 0f;
+            _rL.motorTorque = 0f;
+            _rR.motorTorque = 0f;
+
+            _fL.brakeTorque = 0f;
+            _fR.brakeTorque = 0f;
+            _rL.brakeTorque = 0f;
+            _rR.brakeTorque = 0f;
+        }
+
     }
 
     void Driving()
