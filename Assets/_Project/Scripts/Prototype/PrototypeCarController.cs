@@ -19,6 +19,11 @@ public class PrototypeCarController : MonoBehaviour
 
     [SerializeField] private PrototypeGameSession _gameSession; // 現在のゲーム進行情報を取得する
 
+    [SerializeField] private float _baseMaxSpeed = 40f;   // 最高速の初期値
+    [SerializeField] private float _currentMaxSpeed;                       // プレイ中に変化する最高速度
+
+    [SerializeField] private Rigidbody _rb;                 // 車のリジッドボディ
+
     private void Start()
     {
         _gameSession = FindFirstObjectByType<PrototypeGameSession>();
@@ -28,6 +33,15 @@ public class PrototypeCarController : MonoBehaviour
         {
             Debug.LogError("PrototypeGameSessionが見つかりません。");
         }
+
+        _rb = GetComponent<Rigidbody>();
+        if(_rb == null)
+        {
+            Debug.LogError("車にRigidbodyを設定してください。");
+        }
+
+        // 最高速の初期値を設定
+        _currentMaxSpeed = _baseMaxSpeed;
     }
 
 
@@ -64,24 +78,41 @@ public class PrototypeCarController : MonoBehaviour
         _fL.steerAngle = steering;
         _fR.steerAngle = steering;
 
+        // 速度を取得
+        float speed = _rb.linearVelocity.magnitude * 3.6f;  // 取得する値が m/s のため、km/h に変換
+        // Debug.Log("現在の速度：" + speed.ToString("F2") + " km/h");
+
         // 駆動
-        if(_drive == Drive.FrontDrive)
+        // 現在の速度が最高速度であれば加算しない
+        if(_currentMaxSpeed > speed)
         {
-            _fL.motorTorque = power * 0.5f;
-            _fR.motorTorque = power * 0.5f;
-        }
-        else if(_drive == Drive.RearDrive)
-        {
-            _rL.motorTorque = power * 0.5f;
-            _rR.motorTorque = power * 0.5f;
+            if (_drive == Drive.FrontDrive)
+            {
+                _fL.motorTorque = power * 0.5f;
+                _fR.motorTorque = power * 0.5f;
+            }
+            else if (_drive == Drive.RearDrive)
+            {
+                _rL.motorTorque = power * 0.5f;
+                _rR.motorTorque = power * 0.5f;
+            }
+            else
+            {
+                _fL.motorTorque = power * 0.25f;
+                _fR.motorTorque = power * 0.25f;
+                _rL.motorTorque = power * 0.25f;
+                _rR.motorTorque = power * 0.25f;
+            }
         }
         else
         {
-            _fL.motorTorque = power * 0.25f;
-            _fR.motorTorque = power * 0.25f;
-            _rL.motorTorque = power * 0.25f;
-            _rR.motorTorque = power * 0.25f;
+            _fL.motorTorque = 0f;
+            _fR.motorTorque = 0f;
+            _rL.motorTorque = 0f;
+            _rR.motorTorque = 0f;
         }
+        
+
     }
 
     void Braking()
@@ -102,4 +133,14 @@ public class PrototypeCarController : MonoBehaviour
         }
 
     }
+
+    /// <summary>
+    /// 強化アイテムを取った時の処理
+    /// </summary>
+    public void IncreaseMaxSpeed(float addMaxSpeed)
+    {
+        // 現在の最高速度を更新
+        _currentMaxSpeed += addMaxSpeed;
+    }
+
 }

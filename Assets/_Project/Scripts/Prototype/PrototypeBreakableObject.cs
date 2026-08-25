@@ -30,8 +30,8 @@ public class PrototypeBreakableObject : MonoBehaviour
             Debug.Log("接触");
 
             // プレイヤーと自身の相対速度を取得
-            float relativeSpeed = collision.relativeVelocity.magnitude;
-            Debug.Log("相対速度：" + relativeSpeed);
+            float relativeSpeed = collision.relativeVelocity.magnitude * 3.6f;
+            Debug.Log("相対速度：" + relativeSpeed + " km/h");
 
             // 一定速度以上なら破壊、一定速度未満なら破壊しない
             if (relativeSpeed >= _breakingSpeed)
