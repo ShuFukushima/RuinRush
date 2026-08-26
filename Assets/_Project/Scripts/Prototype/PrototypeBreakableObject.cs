@@ -4,7 +4,7 @@ public class PrototypeBreakableObject : MonoBehaviour
 {
     [SerializeField] private float _breakingSpeed;  // 必要破壊速度
     [SerializeField] private int _scoreValue;       // このオブジェクトを破壊したら入る得点
-
+    [SerializeField] private GameObject _upgradeItem;   // 破壊された際に生成されるプレハブ
     private PrototypeGameSession _gameSession; // 破壊された際にスコア加算を行う
 
 
@@ -56,7 +56,18 @@ public class PrototypeBreakableObject : MonoBehaviour
         // 将来的に、破片に砕ける処理などにする
         _gameSession.AddScore(_scoreValue);
 
+        // Breakは破壊する際の処理まとめになるので、この中でアイテムの生成を呼ぶ
+        SpawnUpgradeItem();
+
         Destroy(gameObject);
+    }
+
+    /// <summary>
+    /// 強化アイテムを生成する
+    /// </summary>
+    private void SpawnUpgradeItem()
+    {
+        Instantiate(_upgradeItem, gameObject.transform.position, Quaternion.identity);
     }
 
 }

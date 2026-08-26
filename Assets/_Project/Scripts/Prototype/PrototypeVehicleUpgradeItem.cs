@@ -23,6 +23,7 @@ public class PrototypeVehicleUpgradeItem : MonoBehaviour
             // プレイヤーだったら
             if (player != null)
             {
+                Debug.Log("パワーアップアイテムを取得");
                 // 自身のアイテム種別に従ってパラメーターを強化する
                 player.IncreaseMaxSpeed(_addMaxSpeed);
                 Destroy(gameObject);
