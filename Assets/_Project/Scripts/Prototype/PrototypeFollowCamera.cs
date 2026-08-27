@@ -13,7 +13,7 @@ public class PrototypeFollowCamera : MonoBehaviour
         gameObject.transform.position = followPosition;
 
         // 回転を合わせる
-        // 対象オブジェクトに対して注目させる という処理に変更する
+        // 対象オブジェクトに対して注目させる という処理
         gameObject.transform.LookAt(_followObj.transform);
     }
 }
