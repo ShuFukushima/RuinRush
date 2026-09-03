@@ -77,7 +77,7 @@ MonoBehaviour:
   _breakingSpeed: 60
   _scoreValue: 30
   _upgradeItem: {fileID: 4690898888433504167, guid: 814142ebd61c19845b47c5f4b0f48513, type: 3}
-  _fragmentObj: {fileID: 6613677318351500335, guid: 1d4794f396e81ec488161bf4f0d9d40a, type: 3}
+  _fragmentObj: {fileID: 8683895766151473556, guid: 8a4e7797f86ee41488228ff21db36d4f, type: 3}
   _explosionForce: 20
   _explosionRadius: 20
 --- !u!1 &8771442585785856832
