@@ -14,7 +14,7 @@ GameObject:
   - component: {fileID: 2198272329370985275}
   - component: {fileID: 7722691594603438634}
   m_Layer: 0
-  m_Name: PrototypeItem
+  m_Name: PrototypeSpeedUpItem
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -68,7 +68,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 31321ba15b8f8eb4c954353edc038b1d, type: 2}
+  - {fileID: 2100000, guid: fa6f81be749425243b38869885bc4f4c, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -127,4 +127,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 149f66a2acd27b54eac83bde266905ff, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::PrototypeVehicleUpgradeItem
+  _itemType: 0
   _addMaxSpeed: 10
+  _addMaxTorque: 0

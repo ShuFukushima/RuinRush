@@ -102,7 +102,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::PrototypeBreakableObject
   _breakingSpeed: 5
   _scoreValue: 10
-  _upgradeItem: {fileID: 4690898888433504167, guid: 814142ebd61c19845b47c5f4b0f48513, type: 3}
+  _upgradeMaxSpeedItem: {fileID: 4690898888433504167, guid: 814142ebd61c19845b47c5f4b0f48513, type: 3}
+  _upgradeMaxTorqueItem: {fileID: 4690898888433504167, guid: c4ae6a8bbec8db64ba3cb8e1cfa1d7d3, type: 3}
   _fragmentObj: {fileID: 7041635579233458836, guid: 4ef9512e816ba694cacdd5e826c2f5b4, type: 3}
   _explosionForce: 100
   _explosionRadius: 20

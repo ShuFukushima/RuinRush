@@ -4,7 +4,8 @@ public class PrototypeBreakableObject : MonoBehaviour
 {
     [SerializeField] private float _breakingSpeed;  // 必要破壊速度
     [SerializeField] private int _scoreValue;       // このオブジェクトを破壊したら入る得点
-    [SerializeField] private GameObject _upgradeItem;   // 破壊された際に生成されるプレハブ
+    [SerializeField] private GameObject _upgradeMaxSpeedItem;   // 破壊された際に生成される最高速度強化プレハブ
+    [SerializeField] private GameObject _upgradeMaxTorqueItem;  // 破壊された際に生成されるモータートルク強化プレハブ
     [SerializeField] private GameObject _fragmentObj;   // 破壊された際に生成される破片
 
     [SerializeField] private float _explosionForce = 20f;
@@ -82,7 +83,19 @@ public class PrototypeBreakableObject : MonoBehaviour
     /// </summary>
     private void SpawnUpgradeItem()
     {
-        Instantiate(_upgradeItem, gameObject.transform.position, Quaternion.identity);
+        // 確率でアイテムを選択する
+        GameObject upgradeItem;
+        if(Random.Range(0, 2) == 0)
+        {
+            upgradeItem = _upgradeMaxSpeedItem;
+        }
+        else
+        {
+            upgradeItem = _upgradeMaxTorqueItem;
+        }
+
+        // アイテムを生成する
+        Instantiate(upgradeItem, gameObject.transform.position, Quaternion.identity);
     }
 
     /// <summary>

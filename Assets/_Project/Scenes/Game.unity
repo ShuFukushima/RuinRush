@@ -492,7 +492,7 @@ MonoBehaviour:
   - {fileID: 7810402680084083084, guid: 1e5316b0d99319142a9bae0b8a22d772, type: 3}
   - {fileID: 4593141859189794079, guid: 19db7802882ca334cba8e691ee9a42e5, type: 3}
   _spawnPoints: []
-  _smallRatio: 2
+  _smallRatio: 3
   _mediumRatio: 2
   _largeRatio: 1
 --- !u!114 &172606507
@@ -507,7 +507,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 67dbd50d917a4184d8b3d7f846334740, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::PrototypeCarController
-  _maxPower: 2000
   _steerAngle: 45
   _maxBrake: 2000
   _fL: {fileID: 1442018454}
@@ -517,7 +516,9 @@ MonoBehaviour:
   _drive: 1
   _gameSession: {fileID: 0}
   _baseMaxSpeed: 5000
+  _baseMaxTorque: 1000
   _currentMaxSpeed: 0
+  _currentMaxTorque: 0
   _rb: {fileID: 0}
 --- !u!54 &172606508
 Rigidbody:

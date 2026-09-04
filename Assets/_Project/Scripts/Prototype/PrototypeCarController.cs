@@ -11,7 +11,6 @@ public class PrototypeCarController : MonoBehaviour
 
     }
 
-    [SerializeField] private float _maxPower;   // 最高出力トルク
     [SerializeField] private float _steerAngle; // ハンドルの最高舵角
     [SerializeField] private float _maxBrake;   // ブレーキトルク
     [SerializeField] private WheelCollider _fL, _fR, _rL, _rR;  // 4輪分のWheelCollider
@@ -20,7 +19,9 @@ public class PrototypeCarController : MonoBehaviour
     [SerializeField] private PrototypeGameSession _gameSession; // 現在のゲーム進行情報を取得する
 
     [SerializeField] private float _baseMaxSpeed = 40f;   // 最高速の初期値
+    [SerializeField] private float _baseMaxTorque = 1000f;
     [SerializeField] private float _currentMaxSpeed;                       // プレイ中に変化する最高速度
+    [SerializeField] private float _currentMaxTorque;                       // プレイ中に変化するモータートルク
 
     [SerializeField] private Rigidbody _rb;                 // 車のリジッドボディ
 
@@ -42,6 +43,7 @@ public class PrototypeCarController : MonoBehaviour
 
         // 最高速の初期値を設定
         _currentMaxSpeed = _baseMaxSpeed;
+        _currentMaxTorque = _baseMaxTorque;
     }
 
 
@@ -71,7 +73,7 @@ public class PrototypeCarController : MonoBehaviour
     void Driving()
     {
         // 入力
-        float power = _maxPower * Input.GetAxis("Vertical");
+        float power = _currentMaxTorque * Input.GetAxis("Vertical");
         float steering = _steerAngle * Input.GetAxis("Horizontal");
 
         // ハンドル操作
@@ -135,12 +137,18 @@ public class PrototypeCarController : MonoBehaviour
     }
 
     /// <summary>
-    /// 強化アイテムを取った時の処理
+    /// 最高速度強化アイテムを取った時の処理
     /// </summary>
     public void IncreaseMaxSpeed(float addMaxSpeed)
     {
         // 現在の最高速度を更新
         _currentMaxSpeed += addMaxSpeed;
+    }
+
+    public void IncreaseMaxTorque(float addMaxTorque)
+    {
+        // 現在のモータートルクを更新
+        _currentMaxTorque += addMaxTorque;
     }
 
 }
