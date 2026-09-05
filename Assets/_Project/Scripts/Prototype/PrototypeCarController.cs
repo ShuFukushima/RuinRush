@@ -22,6 +22,7 @@ public class PrototypeCarController : MonoBehaviour
     [SerializeField] private float _baseMaxTorque = 1000f;
     [SerializeField] private float _currentMaxSpeed;                       // プレイ中に変化する最高速度
     [SerializeField] private float _currentMaxTorque;                       // プレイ中に変化するモータートルク
+    [SerializeField] private float _currentSpeed;
 
     [SerializeField] private Rigidbody _rb;                 // 車のリジッドボディ
 
@@ -67,6 +68,9 @@ public class PrototypeCarController : MonoBehaviour
             _rL.brakeTorque = 0f;
             _rR.brakeTorque = 0f;
         }
+
+        // 速度取得
+        _currentSpeed = _rb.linearVelocity.magnitude * 3.6f;
 
     }
 
@@ -151,4 +155,14 @@ public class PrototypeCarController : MonoBehaviour
         _currentMaxTorque += addMaxTorque;
     }
 
+    /// <summary>
+    /// プレイヤーの現在速度を返す
+    /// </summary>
+    /// <param name="playerGO"></param>
+    /// <returns></returns>
+    public float GetPlayerCurrentSpeed()
+    {
+        // 例: PlayerController が持つ _currentSpeed を返す
+        return _currentSpeed;
+    }
 }

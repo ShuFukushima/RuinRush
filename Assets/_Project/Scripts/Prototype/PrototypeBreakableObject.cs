@@ -19,14 +19,15 @@ public class PrototypeBreakableObject : MonoBehaviour
         _gameSession = FindFirstObjectByType<PrototypeGameSession>();
 
         // エラー処理
-        if(_gameSession == null)
+        if (_gameSession == null)
         {
             Debug.LogError("PrototypeGameSessionが見つかりません。");
         }
     }
 
 
-    // プレイヤーと衝突した際に、破壊速度かどうかを判定する
+    // プレイヤーと衝突した際に、破壊速度かどうかを判定する（旧バージョン）
+    /*
     private void OnCollisionEnter(Collision collision)
     {
         // プレイヤーかどうかを判定
@@ -54,11 +55,37 @@ public class PrototypeBreakableObject : MonoBehaviour
 
         }
     }
+    */
+    
 
-    // 将来的にこっちに移行する
+    // プレイヤーと衝突した際に破壊速度かどうかを判定
     private void OnTriggerEnter(Collider other)
     {
-        Collision collision = other.GetComponent<Collision>();
+        // プレイヤーかどうか判定
+        if (!other.CompareTag("Player")) return;
+
+        Debug.Log("接触");
+
+        // プレイヤーの速度を取得
+        PrototypeCarController player = other.gameObject.GetComponent<PrototypeCarController>();
+        float playerSpeed = player.GetPlayerCurrentSpeed();
+
+        // 接触した瞬間のプレイヤーの座標を取得
+        Vector3 playerCollisionPoint = player.transform.position;
+
+        // 一定速度以上なら破壊、一定速度未満なら破壊しない
+        if (playerSpeed >= _breakingSpeed)
+        {
+            Debug.Log("必要破壊速度以上なので破壊します。");
+            Break(playerCollisionPoint);
+        }
+        else
+        {
+            Debug.Log("必要破壊速度未満です。破壊しません。");
+        }
+
+
+
     }
 
     /// <summary>

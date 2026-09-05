@@ -519,7 +519,6 @@ MonoBehaviour:
   _baseMaxTorque: 1000
   _currentMaxSpeed: 0
   _currentMaxTorque: 0
-  _currentSpeed: 0
   _rb: {fileID: 0}
 --- !u!54 &172606508
 Rigidbody:
@@ -3868,6 +3867,14 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 3783352209053847285, guid: 19db7802882ca334cba8e691ee9a42e5, type: 3}
+      propertyPath: _fragmentObj
+      value: 
+      objectReference: {fileID: 8683895766151473556, guid: 8a4e7797f86ee41488228ff21db36d4f, type: 3}
+    - target: {fileID: 3783352209053847285, guid: 19db7802882ca334cba8e691ee9a42e5, type: 3}
+      propertyPath: _explosionRadius
+      value: 30
+      objectReference: {fileID: 0}
     - target: {fileID: 4593141859189794079, guid: 19db7802882ca334cba8e691ee9a42e5, type: 3}
       propertyPath: m_Name
       value: Building_Large
@@ -4165,6 +4172,18 @@ PrefabInstance:
     - target: {fileID: 2677587348286022824, guid: e10a2fd1aaaab7b41971214d2799101d, type: 3}
       propertyPath: m_IsActive
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3823003324859606313, guid: e10a2fd1aaaab7b41971214d2799101d, type: 3}
+      propertyPath: _breakingSpeed
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 3823003324859606313, guid: e10a2fd1aaaab7b41971214d2799101d, type: 3}
+      propertyPath: _explosionForce
+      value: 200
+      objectReference: {fileID: 0}
+    - target: {fileID: 3823003324859606313, guid: e10a2fd1aaaab7b41971214d2799101d, type: 3}
+      propertyPath: _explosionRadius
+      value: 30
       objectReference: {fileID: 0}
     - target: {fileID: 5616677829914266821, guid: e10a2fd1aaaab7b41971214d2799101d, type: 3}
       propertyPath: m_LocalPosition.x
@@ -4645,6 +4664,18 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 4967940151537716157, guid: 1e5316b0d99319142a9bae0b8a22d772, type: 3}
+      propertyPath: _fragmentObj
+      value: 
+      objectReference: {fileID: 992106713089316838, guid: 1c4f618026278d844a9fc9563d0db883, type: 3}
+    - target: {fileID: 4967940151537716157, guid: 1e5316b0d99319142a9bae0b8a22d772, type: 3}
+      propertyPath: _explosionForce
+      value: 20
+      objectReference: {fileID: 0}
+    - target: {fileID: 4967940151537716157, guid: 1e5316b0d99319142a9bae0b8a22d772, type: 3}
+      propertyPath: _explosionRadius
+      value: 30
+      objectReference: {fileID: 0}
     - target: {fileID: 5744352244289375746, guid: 1e5316b0d99319142a9bae0b8a22d772, type: 3}
       propertyPath: m_LocalPosition.x
       value: 485
@@ -4691,7 +4722,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7810402680084083084, guid: 1e5316b0d99319142a9bae0b8a22d772, type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
