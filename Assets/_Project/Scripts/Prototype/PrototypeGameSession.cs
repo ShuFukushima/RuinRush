@@ -52,6 +52,15 @@ public class PrototypeGameSession : MonoBehaviour
     }
 
     /// <summary>
+    /// 現在の残り時間を返すゲッターメソッド
+    /// </summary>
+    /// <returns></returns>
+    public float GetCurrentTime()
+    {
+        return _currentTime;
+    }
+
+    /// <summary>
     /// 現在のゲーム進行状況を返すゲッターメソッド
     /// </summary>
     /// <returns></returns>

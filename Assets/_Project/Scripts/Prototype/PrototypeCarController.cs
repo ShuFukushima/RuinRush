@@ -70,7 +70,7 @@ public class PrototypeCarController : MonoBehaviour
         }
 
         // 速度取得
-        _currentSpeed = _rb.linearVelocity.magnitude * 3.6f;
+        GetPlayerCurrentSpeed();
 
     }
 
@@ -162,7 +162,8 @@ public class PrototypeCarController : MonoBehaviour
     /// <returns></returns>
     public float GetPlayerCurrentSpeed()
     {
-        // 例: PlayerController が持つ _currentSpeed を返す
+        _currentSpeed = _rb.linearVelocity.magnitude * 3.6f;
+        
         return _currentSpeed;
     }
 }
