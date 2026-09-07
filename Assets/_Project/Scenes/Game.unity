@@ -5362,6 +5362,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 360498637114925582, guid: 4ef9512e816ba694cacdd5e826c2f5b4, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 7041635579233458836, guid: 4ef9512e816ba694cacdd5e826c2f5b4, type: 3}
       propertyPath: m_Name
       value: Building_Small_Broken
