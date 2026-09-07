@@ -149,4 +149,13 @@ public class PrototypeBreakableObject : MonoBehaviour
 
     }
 
+    /// <summary>
+    /// この建物の破壊可能速度を外部から取得するゲッターメソッド
+    /// </summary>
+    /// <returns></returns>
+    public float GetBreakingSpeed()
+    {
+        return _breakingSpeed;
+    }
+
 }

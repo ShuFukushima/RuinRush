@@ -4293,7 +4293,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4593141859189794079, guid: 19db7802882ca334cba8e691ee9a42e5, type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 4742652639359160288, guid: 19db7802882ca334cba8e691ee9a42e5, type: 3}
       propertyPath: m_LocalPosition.x
@@ -4334,6 +4334,22 @@ PrefabInstance:
     - target: {fileID: 4742652639359160288, guid: 19db7802882ca334cba8e691ee9a42e5, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: -19.7
+      objectReference: {fileID: 0}
+    - target: {fileID: 7910517960415194197, guid: 19db7802882ca334cba8e691ee9a42e5, type: 3}
+      propertyPath: m_Enabled
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7910517960415194197, guid: 19db7802882ca334cba8e691ee9a42e5, type: 3}
+      propertyPath: _glowCurve.m_Curve.Array.data[1].time
+      value: 0.995
+      objectReference: {fileID: 0}
+    - target: {fileID: 7910517960415194197, guid: 19db7802882ca334cba8e691ee9a42e5, type: 3}
+      propertyPath: _glowCurve.m_Curve.Array.data[2].inSlope
+      value: 200.0002
+      objectReference: {fileID: 0}
+    - target: {fileID: 7910517960415194197, guid: 19db7802882ca334cba8e691ee9a42e5, type: 3}
+      propertyPath: _glowCurve.m_Curve.Array.data[2].outSlope
+      value: 200.0002
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -4580,10 +4596,6 @@ PrefabInstance:
     - target: {fileID: 2677587348286022824, guid: e10a2fd1aaaab7b41971214d2799101d, type: 3}
       propertyPath: m_Name
       value: Building_Small
-      objectReference: {fileID: 0}
-    - target: {fileID: 2677587348286022824, guid: e10a2fd1aaaab7b41971214d2799101d, type: 3}
-      propertyPath: m_IsActive
-      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 5616677829914266821, guid: e10a2fd1aaaab7b41971214d2799101d, type: 3}
       propertyPath: m_LocalPosition.x
@@ -5107,10 +5119,6 @@ PrefabInstance:
     - target: {fileID: 7810402680084083084, guid: 1e5316b0d99319142a9bae0b8a22d772, type: 3}
       propertyPath: m_Name
       value: Building_Medium
-      objectReference: {fileID: 0}
-    - target: {fileID: 7810402680084083084, guid: 1e5316b0d99319142a9bae0b8a22d772, type: 3}
-      propertyPath: m_IsActive
-      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []

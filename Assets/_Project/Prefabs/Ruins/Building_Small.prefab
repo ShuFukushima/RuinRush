@@ -86,6 +86,7 @@ GameObject:
   - component: {fileID: 5616677829914266821}
   - component: {fileID: 3823003324859606313}
   - component: {fileID: 1143133778980676359}
+  - component: {fileID: 6230025633396764460}
   m_Layer: 0
   m_Name: Building_Small
   m_TagString: Untagged
@@ -156,6 +157,55 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
+--- !u!114 &6230025633396764460
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2677587348286022824}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8b3a0de85e3b88a4886a4b36da49c815, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::PrototypeRuinFeedback
+  _renderer: {fileID: 3815746479409688556}
+  _breakingSpeed: 0
+  _maximumLmnInt: 30
+  _glowCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 34
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0.33333334
+    - serializedVersion: 3
+      time: 0.995
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.06030846
+      outWeight: 1
+    - serializedVersion: 3
+      time: 1
+      value: 1
+      inSlope: 200.0002
+      outSlope: 200.0002
+      tangentMode: 34
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  _matIndex: 0
 --- !u!1001 &2537167701517529960
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -204,6 +254,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: -7511558181221131132, guid: 4796e7ea33a2a54469d2b274d92c45ff, type: 3}
+      propertyPath: 'm_Materials.Array.data[0]'
+      value: 
+      objectReference: {fileID: 2100000, guid: 35ef23e9701dd424ca84a48de5aa2e55, type: 2}
     - target: {fileID: 919132149155446097, guid: 4796e7ea33a2a54469d2b274d92c45ff, type: 3}
       propertyPath: m_Name
       value: VisualModel
@@ -216,5 +270,10 @@ PrefabInstance:
 --- !u!4 &2647955951234487427 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: 4796e7ea33a2a54469d2b274d92c45ff, type: 3}
+  m_PrefabInstance: {fileID: 2537167701517529960}
+  m_PrefabAsset: {fileID: 0}
+--- !u!23 &3815746479409688556 stripped
+MeshRenderer:
+  m_CorrespondingSourceObject: {fileID: -7511558181221131132, guid: 4796e7ea33a2a54469d2b274d92c45ff, type: 3}
   m_PrefabInstance: {fileID: 2537167701517529960}
   m_PrefabAsset: {fileID: 0}

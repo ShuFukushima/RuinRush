@@ -415,6 +415,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::PrototypeTireVisualController
   _wc: {fileID: 116069649}
+  _isRight: 0
 --- !u!1 &213218259
 GameObject:
   m_ObjectHideFlags: 0
@@ -1230,7 +1231,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::PrototypeBreakableObject
   _breakingSpeed: 60
   _scoreValue: 30
-  _upgradeItem: {fileID: 4690898888433504167, guid: 814142ebd61c19845b47c5f4b0f48513, type: 3}
+  _upgradeMaxSpeedItem: {fileID: 0}
+  _upgradeMaxTorqueItem: {fileID: 0}
   _fragmentObj: {fileID: 6613677318351500335, guid: 1d4794f396e81ec488161bf4f0d9d40a, type: 3}
   _explosionForce: 20
   _explosionRadius: 20
@@ -1575,6 +1577,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::PrototypeTireVisualController
   _wc: {fileID: 1276139017}
+  _isRight: 0
 --- !u!1 &609022798
 GameObject:
   m_ObjectHideFlags: 0
@@ -1758,6 +1761,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::PrototypeTireVisualController
   _wc: {fileID: 876808596}
+  _isRight: 0
 --- !u!1 &832575517
 GameObject:
   m_ObjectHideFlags: 0
@@ -1909,7 +1913,12 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::PrototypeScoreUI
   _score: 0
+  _time: 0
+  _speed: 0
   _scoreText: {fileID: 609022800}
+  _timeText: {fileID: 0}
+  _speedText: {fileID: 0}
+  _hudPanel: {fileID: 0}
 --- !u!4 &984685628
 Transform:
   m_ObjectHideFlags: 0
@@ -2373,7 +2382,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::PrototypeBreakableObject
   _breakingSpeed: 30
   _scoreValue: 10
-  _upgradeItem: {fileID: 4690898888433504167, guid: 814142ebd61c19845b47c5f4b0f48513, type: 3}
+  _upgradeMaxSpeedItem: {fileID: 0}
+  _upgradeMaxTorqueItem: {fileID: 0}
   _fragmentObj: {fileID: 6613677318351500335, guid: 1d4794f396e81ec488161bf4f0d9d40a, type: 3}
   _explosionForce: 20
   _explosionRadius: 20
@@ -2685,6 +2695,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::PrototypeTireVisualController
   _wc: {fileID: 1067438350}
+  _isRight: 0
 --- !u!1 &1728017104
 GameObject:
   m_ObjectHideFlags: 0
@@ -2829,7 +2840,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 67dbd50d917a4184d8b3d7f846334740, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::PrototypeCarController
-  _maxPower: 2000
   _steerAngle: 45
   _maxBrake: 2000
   _fL: {fileID: 1276139017}
@@ -2839,7 +2849,10 @@ MonoBehaviour:
   _drive: 1
   _gameSession: {fileID: 0}
   _baseMaxSpeed: 40
+  _baseMaxTorque: 1000
   _currentMaxSpeed: 0
+  _currentMaxTorque: 0
+  _currentSpeed: 0
   _rb: {fileID: 0}
 --- !u!54 &1826937529
 Rigidbody:
@@ -2907,6 +2920,132 @@ Transform:
   - {fileID: 2132112431}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &1867631837
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1867631841}
+  - component: {fileID: 1867631840}
+  - component: {fileID: 1867631839}
+  - component: {fileID: 1867631838}
+  - component: {fileID: 1867631842}
+  m_Layer: 0
+  m_Name: ShaderTest
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!65 &1867631838
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1867631837}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 1, y: 1, z: 1}
+  m_Center: {x: 0, y: 0, z: 0}
+--- !u!23 &1867631839
+MeshRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1867631837}
+  m_Enabled: 1
+  m_CastShadows: 1
+  m_ReceiveShadows: 1
+  m_DynamicOccludee: 1
+  m_StaticShadowCaster: 0
+  m_MotionVectors: 1
+  m_LightProbeUsage: 1
+  m_ReflectionProbeUsage: 1
+  m_RayTracingMode: 2
+  m_RayTraceProcedural: 0
+  m_RayTracingAccelStructBuildFlagsOverride: 0
+  m_RayTracingAccelStructBuildFlags: 1
+  m_SmallMeshCulling: 1
+  m_ForceMeshLod: -1
+  m_MeshLodSelectionBias: 0
+  m_RenderingLayerMask: 1
+  m_RendererPriority: 0
+  m_Materials:
+  - {fileID: 2100000, guid: 062554b978e5d714b9056715b7f4f2e9, type: 2}
+  m_StaticBatchInfo:
+    firstSubMesh: 0
+    subMeshCount: 0
+  m_StaticBatchRoot: {fileID: 0}
+  m_ProbeAnchor: {fileID: 0}
+  m_LightProbeVolumeOverride: {fileID: 0}
+  m_ScaleInLightmap: 1
+  m_ReceiveGI: 1
+  m_PreserveUVs: 0
+  m_IgnoreNormalsForChartDetection: 0
+  m_ImportantGI: 0
+  m_StitchLightmapSeams: 1
+  m_SelectedEditorRenderState: 3
+  m_MinimumChartSize: 4
+  m_AutoUVMaxDistance: 0.5
+  m_AutoUVMaxAngle: 89
+  m_LightmapParameters: {fileID: 0}
+  m_GlobalIlluminationMeshLod: 0
+  m_SortingLayerID: 0
+  m_SortingLayer: 0
+  m_SortingOrder: 0
+  m_MaskInteraction: 0
+  m_AdditionalVertexStreams: {fileID: 0}
+--- !u!33 &1867631840
+MeshFilter:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1867631837}
+  m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!4 &1867631841
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1867631837}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 6.41, y: 2.37263, z: -71.57362}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1867631842
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1867631837}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1d5d436fd86d18c489e3afdcffecc69e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::PrototypeShaderFeedbackTest
+  _glowStrength: 0
 --- !u!1 &1873604544
 GameObject:
   m_ObjectHideFlags: 0
@@ -3275,7 +3414,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::PrototypeBreakableObject
   _breakingSpeed: 50
   _scoreValue: 20
-  _upgradeItem: {fileID: 4690898888433504167, guid: 814142ebd61c19845b47c5f4b0f48513, type: 3}
+  _upgradeMaxSpeedItem: {fileID: 0}
+  _upgradeMaxTorqueItem: {fileID: 0}
   _fragmentObj: {fileID: 6613677318351500335, guid: 1d4794f396e81ec488161bf4f0d9d40a, type: 3}
   _explosionForce: 20
   _explosionRadius: 20
@@ -3513,3 +3653,4 @@ SceneRoots:
   - {fileID: 5155987581155355692}
   - {fileID: 8208489997184153330}
   - {fileID: 494975270}
+  - {fileID: 1867631841}
