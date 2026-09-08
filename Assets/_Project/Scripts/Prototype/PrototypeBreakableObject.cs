@@ -7,6 +7,9 @@ public class PrototypeBreakableObject : MonoBehaviour
     [SerializeField] private GameObject _upgradeMaxSpeedItem;   // 破壊された際に生成される最高速度強化プレハブ
     [SerializeField] private GameObject _upgradeMaxTorqueItem;  // 破壊された際に生成されるモータートルク強化プレハブ
     [SerializeField] private GameObject _fragmentObj;   // 破壊された際に生成される破片
+    [SerializeField] private GameObject _particle;      // 破壊された際に生成される爆発パーティクル
+    [SerializeField] private PrototypeCameraShake _cameraShake;
+    [SerializeField] private float _shakeIntensity;     // 破壊された際に揺らす強さ
 
     [SerializeField] private float _explosionForce = 20f;
     [SerializeField] private float _explosionRadius = 1f;
@@ -17,6 +20,7 @@ public class PrototypeBreakableObject : MonoBehaviour
     {
         // ゲームセッションスクリプトを持つオブジェクトをシーン上から取得する
         _gameSession = FindFirstObjectByType<PrototypeGameSession>();
+        _cameraShake = FindFirstObjectByType<PrototypeCameraShake>();
 
         // エラー処理
         if (_gameSession == null)
@@ -101,6 +105,8 @@ public class PrototypeBreakableObject : MonoBehaviour
         // Breakは破壊する際の処理まとめになるので、この中でアイテムの生成を呼ぶ
         SpawnUpgradeItem(); // アイテムを生成
         SpawnFragmentObj(collisionPoint); // 破片を生成
+        SpawnParticle(collisionPoint);      // パーティクルを生成
+        _cameraShake.StartShake(_shakeIntensity);
 
         Destroy(gameObject);
     }
@@ -123,6 +129,15 @@ public class PrototypeBreakableObject : MonoBehaviour
 
         // アイテムを生成する
         Instantiate(upgradeItem, gameObject.transform.position, Quaternion.identity);
+    }
+
+    /// <summary>
+    /// 破壊時にパーティクルを生成
+    /// </summary>
+    private void SpawnParticle(Vector3 collisionPoint)
+    {
+        // パーティクルを生成
+        Instantiate(_particle, new Vector3(transform.position.x, collisionPoint.y, transform.position.z), Quaternion.identity);
     }
 
     /// <summary>

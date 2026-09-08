@@ -261,6 +261,9 @@ MonoBehaviour:
   _upgradeMaxSpeedItem: {fileID: 4690898888433504167, guid: 814142ebd61c19845b47c5f4b0f48513, type: 3}
   _upgradeMaxTorqueItem: {fileID: 4690898888433504167, guid: c4ae6a8bbec8db64ba3cb8e1cfa1d7d3, type: 3}
   _fragmentObj: {fileID: 992106713089316838, guid: 1c4f618026278d844a9fc9563d0db883, type: 3}
+  _particle: {fileID: 7138763762151677052, guid: d9f92af9505266149b073c5108c01ba6, type: 3}
+  _cameraShake: {fileID: 0}
+  _shakeIntensity: 0.3
   _explosionForce: 20
   _explosionRadius: 30
 --- !u!114 &8323061890747407114
@@ -275,7 +278,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8b3a0de85e3b88a4886a4b36da49c815, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::PrototypeRuinFeedback
-  _renderer: {fileID: 2606681405599457909}
+  _materials:
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  _renderers:
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  _materialName: RuinFeedback_Medium
   _breakingSpeed: 0
   _maximumLmnInt: 30
   _glowCurve:

@@ -1073,12 +1073,12 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 330585543}
   serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 1, z: -10}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
-  m_Father: {fileID: 0}
+  m_Father: {fileID: 989597845}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &330585547
 MonoBehaviour:
@@ -1133,11 +1133,12 @@ MonoBehaviour:
   m_GameObject: {fileID: 330585543}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 5d3b1d2a70d64b9468837a41a03c8a9a, type: 3}
+  m_Script: {fileID: 11500000, guid: def3d5adbb41da74cbd8b4fe918b3f1d, type: 3}
   m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::PrototypeFollowCamera
-  _followObj: {fileID: 919132149326870904}
-  _offsetPos: {x: 0, y: 2, z: -10}
+  m_EditorClassIdentifier: Assembly-CSharp::PrototypeCameraShake
+  _shakeTime: 1
+  _shakeIntensity: 0.5
+  _currentTime: 0
 --- !u!1 &359542142
 GameObject:
   m_ObjectHideFlags: 0
@@ -2488,6 +2489,53 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::PrototypeResultUI
   _resultPanel: {fileID: 316682898}
   _resultScoreText: {fileID: 1895121098}
+--- !u!1 &989597843
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 989597845}
+  - component: {fileID: 989597844}
+  m_Layer: 0
+  m_Name: CameraRig
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &989597844
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 989597843}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5d3b1d2a70d64b9468837a41a03c8a9a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::PrototypeFollowCamera
+  _followObj: {fileID: 919132149326870904}
+  _offsetPos: {x: 0, y: 2, z: -10}
+--- !u!4 &989597845
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 989597843}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -2.08498, y: -0, z: -12.7507}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children:
+  - {fileID: 330585546}
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1123641209
 GameObject:
   m_ObjectHideFlags: 0
@@ -5839,7 +5887,6 @@ GameObject:
 SceneRoots:
   m_ObjectHideFlags: 0
   m_Roots:
-  - {fileID: 330585546}
   - {fileID: 410087041}
   - {fileID: 832575519}
   - {fileID: 1728017108}
@@ -5859,3 +5906,4 @@ SceneRoots:
   - {fileID: 3182796232717006726}
   - {fileID: 6045485838080994845}
   - {fileID: 1662991457334606466}
+  - {fileID: 989597845}
