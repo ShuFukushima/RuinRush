@@ -1,6 +1,6 @@
 using UnityEngine;
 
-public class PrototypeVehicleUpgradeItem : MonoBehaviour
+public class VehicleUpgradeItem : MonoBehaviour
 {
     // アイテムの種類分類
     enum ItemType
@@ -22,7 +22,7 @@ public class PrototypeVehicleUpgradeItem : MonoBehaviour
         if (other.gameObject.CompareTag("Player"))
         {
             // プレイヤーならばコントローラーを取得
-            PrototypeCarController player = other.GetComponentInParent<PrototypeCarController>();
+            CarController player = other.GetComponentInParent<CarController>();
 
             // プレイヤーだったら
             if (player != null)

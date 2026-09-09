@@ -1,6 +1,6 @@
 using UnityEngine;
 
-public class PrototypeShaderFeedbackTest : MonoBehaviour
+public class ShaderFeedbackTest : MonoBehaviour
 {
     [SerializeField] private float _glowStrength;
 

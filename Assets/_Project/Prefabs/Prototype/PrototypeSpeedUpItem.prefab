@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 3041674587466610621}
   - component: {fileID: 7397814482190929455}
   - component: {fileID: 2198272329370985275}
-  - component: {fileID: 7722691594603438634}
+  - component: {fileID: 2622139023433709025}
   m_Layer: 0
   m_Name: PrototypeSpeedUpItem
   m_TagString: Untagged
@@ -115,7 +115,7 @@ CapsuleCollider:
   m_Height: 2
   m_Direction: 1
   m_Center: {x: 0, y: 0, z: 0}
---- !u!114 &7722691594603438634
+--- !u!114 &2622139023433709025
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -124,9 +124,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 4690898888433504167}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 149f66a2acd27b54eac83bde266905ff, type: 3}
+  m_Script: {fileID: 11500000, guid: 0a581989e02c9864dba6db355e51ca41, type: 3}
   m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::PrototypeVehicleUpgradeItem
-  _itemType: 0
+  m_EditorClassIdentifier: Assembly-CSharp::MaxSpeedUpItem
   _addMaxSpeed: 10
-  _addMaxTorque: 0

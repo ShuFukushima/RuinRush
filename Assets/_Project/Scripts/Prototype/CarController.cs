@@ -1,6 +1,6 @@
 using UnityEngine;
 
-public class PrototypeCarController : MonoBehaviour
+public class CarController : MonoBehaviour
 {
 
     enum Drive
@@ -16,7 +16,7 @@ public class PrototypeCarController : MonoBehaviour
     [SerializeField] private WheelCollider _fL, _fR, _rL, _rR;  // 4輪分のWheelCollider
     [SerializeField] private Drive _drive;                      // 駆動方式を管理
 
-    [SerializeField] private PrototypeGameSession _gameSession; // 現在のゲーム進行情報を取得する
+    [SerializeField] private GameSession _gameSession; // 現在のゲーム進行情報を取得する
 
     [SerializeField] private float _baseMaxSpeed = 40f;   // 最高速の初期値
     [SerializeField] private float _baseMaxTorque = 1000f;
@@ -24,11 +24,14 @@ public class PrototypeCarController : MonoBehaviour
     [SerializeField] private float _currentMaxTorque;                       // プレイ中に変化するモータートルク
     [SerializeField] private float _currentSpeed;
 
+    [SerializeField] private float _wheelBase;
+    [SerializeField] private float _frontTrack;
+
     [SerializeField] private Rigidbody _rb;                 // 車のリジッドボディ
 
     private void Start()
     {
-        _gameSession = FindFirstObjectByType<PrototypeGameSession>();
+        _gameSession = FindAnyObjectByType<GameSession>();
 
         // エラー処理
         if (_gameSession == null)
@@ -54,6 +57,7 @@ public class PrototypeCarController : MonoBehaviour
         if(_gameSession.GetIsPlaying() == true)
         {
             Driving();
+            Steering();
             Braking();
         }
         else
@@ -63,10 +67,10 @@ public class PrototypeCarController : MonoBehaviour
             _rL.motorTorque = 0f;
             _rR.motorTorque = 0f;
 
-            _fL.brakeTorque = 0f;
-            _fR.brakeTorque = 0f;
-            _rL.brakeTorque = 0f;
-            _rR.brakeTorque = 0f;
+            _fL.brakeTorque = _maxBrake;
+            _fR.brakeTorque = _maxBrake;
+            _rL.brakeTorque = _maxBrake;
+            _rR.brakeTorque = _maxBrake;
         }
 
         // 速度取得
@@ -78,15 +82,9 @@ public class PrototypeCarController : MonoBehaviour
     {
         // 入力
         float power = _currentMaxTorque * Input.GetAxis("Vertical");
-        float steering = _steerAngle * Input.GetAxis("Horizontal");
-
-        // ハンドル操作
-        _fL.steerAngle = steering;
-        _fR.steerAngle = steering;
 
         // 速度を取得
         float speed = _rb.linearVelocity.magnitude * 3.6f;  // 取得する値が m/s のため、km/h に変換
-        // Debug.Log("現在の速度：" + speed.ToString("F2") + " km/h");
 
         // 駆動
         // 現在の速度が最高速度であれば加算しない
@@ -119,6 +117,43 @@ public class PrototypeCarController : MonoBehaviour
         }
         
 
+    }
+
+    void Steering()
+    {
+        float steering = _steerAngle * Input.GetAxis("Horizontal");
+
+        // ほぼ直進なら左右とも0度
+        if (Mathf.Abs(steering) < 0.01f)
+        {
+            _fL.steerAngle = 0f;
+            _fR.steerAngle = 0f;
+            return;
+        }
+
+        // 入力をラジアンに変換
+        float angleRad = Mathf.Abs(steering) * Mathf.Deg2Rad;
+
+        // 旋回半径を計算
+        float turningRad = _wheelBase / Mathf.Tan(angleRad);
+
+        // 内輪と外輪を計算
+        float innerAngle = Mathf.Atan(_wheelBase / (turningRad - _frontTrack / 2f)) * Mathf.Rad2Deg;
+        float outerAngle = Mathf.Atan(_wheelBase / (turningRad + _frontTrack / 2f)) * Mathf.Rad2Deg;
+
+        // 右左折で適応する値を変える
+        if(steering > 0f)
+        {
+            // 右折
+            _fL.steerAngle = outerAngle;
+            _fR.steerAngle = innerAngle;
+        }
+        else
+        {
+            // 左折
+            _fL.steerAngle = -innerAngle;
+            _fR.steerAngle = -outerAngle;
+        }
     }
 
     void Braking()

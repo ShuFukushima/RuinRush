@@ -1,6 +1,6 @@
 using UnityEngine;
 
-public class PrototypeFollowCamera : MonoBehaviour
+public class FollowCamera : MonoBehaviour
 {
     [SerializeField] private GameObject _followObj; // カメラが追う対象
     [SerializeField] private Vector3 _offsetPos;    // カメラ座標の調整

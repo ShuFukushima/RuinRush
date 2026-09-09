@@ -1,7 +1,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class PrototypeRuinSpawner : MonoBehaviour
+public class RuinSpawner : MonoBehaviour
 {
     // 配列としてプレハブと生成地点のトランスフォームを持つ
     [SerializeField] private GameObject[] _ruins;

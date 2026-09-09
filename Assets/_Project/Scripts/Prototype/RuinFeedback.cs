@@ -1,10 +1,11 @@
 using UnityEngine;
 using System.Collections.Generic;
 
-public class PrototypeRuinFeedback : MonoBehaviour
+public class RuinFeedback : MonoBehaviour
 {
-    private PrototypeBreakableObject _breakableObject;  // 破壊可能速度を参照する
-    private PrototypeCarController _player;
+    private BreakableObject _breakableObject;  // 破壊可能速度を参照する
+    private CarController _player;
+
 
     [SerializeField] private Material[] _materials = new Material[3];
 
@@ -16,10 +17,10 @@ public class PrototypeRuinFeedback : MonoBehaviour
     private void Awake()
     {
         // 自身についているスクリプトを取得
-        _breakableObject = GetComponent<PrototypeBreakableObject>();
+        _breakableObject = GetComponent<BreakableObject>();
         _breakingSpeed = _breakableObject.GetBreakingSpeed();
 
-        _player = GameObject.FindWithTag("Player").GetComponent<PrototypeCarController>();
+        _player = GameObject.FindWithTag("Player").GetComponent<CarController>();
 
         // Awake 内で明示的に初期化（フィールドでの初期化は、オブジェクトをインスタンシエイトで生成した際は何故だか無効になる）
         _materials = new Material[3];

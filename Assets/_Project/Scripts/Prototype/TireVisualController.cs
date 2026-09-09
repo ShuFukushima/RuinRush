@@ -1,6 +1,6 @@
 using UnityEngine;
 
-public class PrototypeTireVisualController : MonoBehaviour
+public class TireVisualController : MonoBehaviour
 {
     Vector3 _pos;        //タイヤの座標を管理する変数
     Quaternion _rot;     //タイヤの回転を管理する変数

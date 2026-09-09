@@ -1,7 +1,7 @@
 using UnityEngine;
 using TMPro;
 
-public class PrototypeHUD : MonoBehaviour
+public class HUD : MonoBehaviour
 {
     [SerializeField] private int _score;    // UIに表示するスコア
     [SerializeField] private float _time;   // UIに表示する残り時間
@@ -10,14 +10,14 @@ public class PrototypeHUD : MonoBehaviour
     [SerializeField] private TextMeshProUGUI _timeText;
     [SerializeField] private TextMeshProUGUI _speedText;
     [SerializeField] private GameObject _hudPanel;
-    private PrototypeGameSession _gameSession;              // スコアと残り時間を取得
-    private PrototypeCarController _player;                 // 現在の速度を取得
+    private GameSession _gameSession;              // スコアと残り時間を取得
+    private CarController _player;                 // 現在の速度を取得
 
     private void Start()
     {
         // シーン上から必要なオブジェクトを取得
-        _gameSession = FindFirstObjectByType<PrototypeGameSession>();
-        _player = FindFirstObjectByType<PrototypeCarController>();
+        _gameSession = FindFirstObjectByType<GameSession>();
+        _player = FindFirstObjectByType<CarController>();
     }
 
     private void Update()

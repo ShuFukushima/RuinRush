@@ -519,10 +519,12 @@ MonoBehaviour:
   _drive: 1
   _gameSession: {fileID: 0}
   _baseMaxSpeed: 5000
-  _baseMaxTorque: 1000
+  _baseMaxTorque: 1500
   _currentMaxSpeed: 0
   _currentMaxTorque: 0
   _currentSpeed: 0
+  _wheelBase: 2743
+  _frontTrack: 1486
   _rb: {fileID: 0}
 --- !u!54 &172606508
 Rigidbody:
@@ -1139,6 +1141,7 @@ MonoBehaviour:
   _shakeTime: 1
   _shakeIntensity: 0.5
   _currentTime: 0
+  _isShaked: 0
 --- !u!1 &359542142
 GameObject:
   m_ObjectHideFlags: 0
@@ -1689,6 +1692,63 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: -10.371, y: 0, z: 0}
+--- !u!1001 &552396411
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 2920107344794251608, guid: 814142ebd61c19845b47c5f4b0f48513, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 505.4868
+      objectReference: {fileID: 0}
+    - target: {fileID: 2920107344794251608, guid: 814142ebd61c19845b47c5f4b0f48513, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 16.91
+      objectReference: {fileID: 0}
+    - target: {fileID: 2920107344794251608, guid: 814142ebd61c19845b47c5f4b0f48513, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 550.7696
+      objectReference: {fileID: 0}
+    - target: {fileID: 2920107344794251608, guid: 814142ebd61c19845b47c5f4b0f48513, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2920107344794251608, guid: 814142ebd61c19845b47c5f4b0f48513, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2920107344794251608, guid: 814142ebd61c19845b47c5f4b0f48513, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2920107344794251608, guid: 814142ebd61c19845b47c5f4b0f48513, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2920107344794251608, guid: 814142ebd61c19845b47c5f4b0f48513, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2920107344794251608, guid: 814142ebd61c19845b47c5f4b0f48513, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2920107344794251608, guid: 814142ebd61c19845b47c5f4b0f48513, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4690898888433504167, guid: 814142ebd61c19845b47c5f4b0f48513, type: 3}
+      propertyPath: m_Name
+      value: PrototypeSpeedUpItem
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 814142ebd61c19845b47c5f4b0f48513, type: 3}
 --- !u!1 &565852167
 GameObject:
   m_ObjectHideFlags: 0
@@ -3321,6 +3381,63 @@ Transform:
   m_Children: []
   m_Father: {fileID: 132772159}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1001 &1760359791
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 2920107344794251608, guid: c4ae6a8bbec8db64ba3cb8e1cfa1d7d3, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 507.33136
+      objectReference: {fileID: 0}
+    - target: {fileID: 2920107344794251608, guid: c4ae6a8bbec8db64ba3cb8e1cfa1d7d3, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 16.56
+      objectReference: {fileID: 0}
+    - target: {fileID: 2920107344794251608, guid: c4ae6a8bbec8db64ba3cb8e1cfa1d7d3, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 550.15
+      objectReference: {fileID: 0}
+    - target: {fileID: 2920107344794251608, guid: c4ae6a8bbec8db64ba3cb8e1cfa1d7d3, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2920107344794251608, guid: c4ae6a8bbec8db64ba3cb8e1cfa1d7d3, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2920107344794251608, guid: c4ae6a8bbec8db64ba3cb8e1cfa1d7d3, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2920107344794251608, guid: c4ae6a8bbec8db64ba3cb8e1cfa1d7d3, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2920107344794251608, guid: c4ae6a8bbec8db64ba3cb8e1cfa1d7d3, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2920107344794251608, guid: c4ae6a8bbec8db64ba3cb8e1cfa1d7d3, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2920107344794251608, guid: c4ae6a8bbec8db64ba3cb8e1cfa1d7d3, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4690898888433504167, guid: c4ae6a8bbec8db64ba3cb8e1cfa1d7d3, type: 3}
+      propertyPath: m_Name
+      value: PrototypeTorqueUpItem
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: c4ae6a8bbec8db64ba3cb8e1cfa1d7d3, type: 3}
 --- !u!1 &1762893906
 GameObject:
   m_ObjectHideFlags: 0
@@ -5907,3 +6024,5 @@ SceneRoots:
   - {fileID: 6045485838080994845}
   - {fileID: 1662991457334606466}
   - {fileID: 989597845}
+  - {fileID: 552396411}
+  - {fileID: 1760359791}

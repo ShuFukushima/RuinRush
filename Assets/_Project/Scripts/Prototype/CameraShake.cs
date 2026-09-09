@@ -1,6 +1,6 @@
 using UnityEngine;
 
-public class PrototypeCameraShake : MonoBehaviour
+public class CameraShake : MonoBehaviour
 {
     [SerializeField] private float _shakeTime;
     [SerializeField] private float _shakeIntensity;

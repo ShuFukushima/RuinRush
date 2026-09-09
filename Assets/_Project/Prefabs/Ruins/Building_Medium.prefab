@@ -158,8 +158,8 @@ BoxCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Size: {x: 9.27231, y: 12.392813, z: 5.406845}
-  m_Center: {x: -0.027518988, y: 6.4118967, z: -0.7525406}
+  m_Size: {x: 11.3871155, y: 12.392813, z: 7.415848}
+  m_Center: {x: -0.029999733, y: 6.4118967, z: -0.79161835}
 --- !u!65 &406530231927903770
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -179,8 +179,8 @@ BoxCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Size: {x: 3.5090575, y: 9.245161, z: 2.066208}
-  m_Center: {x: -2.9047782, y: 4.8416357, z: 2.246666}
+  m_Size: {x: 5.365302, y: 9.245161, z: 2.8108978}
+  m_Center: {x: -2.9838347, y: 4.8416357, z: 2.619011}
 --- !u!1 &7810402680084083084
 GameObject:
   m_ObjectHideFlags: 0
@@ -262,7 +262,6 @@ MonoBehaviour:
   _upgradeMaxTorqueItem: {fileID: 4690898888433504167, guid: c4ae6a8bbec8db64ba3cb8e1cfa1d7d3, type: 3}
   _fragmentObj: {fileID: 992106713089316838, guid: 1c4f618026278d844a9fc9563d0db883, type: 3}
   _particle: {fileID: 7138763762151677052, guid: d9f92af9505266149b073c5108c01ba6, type: 3}
-  _cameraShake: {fileID: 0}
   _shakeIntensity: 0.3
   _explosionForce: 20
   _explosionRadius: 30
@@ -286,7 +285,6 @@ MonoBehaviour:
   - {fileID: 0}
   - {fileID: 0}
   - {fileID: 0}
-  _materialName: RuinFeedback_Medium
   _breakingSpeed: 0
   _maximumLmnInt: 30
   _glowCurve:
@@ -322,7 +320,6 @@ MonoBehaviour:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
-  _matIndex: 1
 --- !u!1001 &1780309821757988429
 PrefabInstance:
   m_ObjectHideFlags: 0

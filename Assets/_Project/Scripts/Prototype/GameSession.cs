@@ -1,6 +1,6 @@
 using UnityEngine;
 
-public class PrototypeGameSession : MonoBehaviour
+public class GameSession : MonoBehaviour
 {
     // 合計スコアを持つ
     [SerializeField] private int _currentScore = 0;
@@ -67,5 +67,15 @@ public class PrototypeGameSession : MonoBehaviour
     public bool GetIsPlaying()
     {
         return _isPlaying;
+    }
+
+    /// <summary>
+    /// デリゲートに入れる
+    /// </summary>
+    /// <param name="score"></param>
+    private void OnRuinBraking(int score)
+    {
+        // スコアを加算する
+        _currentScore += score;
     }
 }

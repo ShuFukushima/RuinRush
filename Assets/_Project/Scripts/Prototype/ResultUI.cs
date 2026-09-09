@@ -2,11 +2,11 @@ using TMPro;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
-public class PrototypeResultUI : MonoBehaviour
+public class ResultUI : MonoBehaviour
 {
     [SerializeField] private GameObject _resultPanel;
     [SerializeField] private TextMeshProUGUI _resultScoreText;
-    private PrototypeGameSession _gameSession;              // スコア・ゲームの進行状況を取得
+    private GameSession _gameSession;              // スコア・ゲームの進行状況を取得
     private bool _hasShownResult = false;                   // リザルトパネルを1回だけ表示させる
 
 
@@ -26,7 +26,7 @@ public class PrototypeResultUI : MonoBehaviour
         _resultPanel.SetActive(false);  // 明示的にfalseにする
 
         // シーン上からゲームセッションを取得
-        _gameSession = FindFirstObjectByType<PrototypeGameSession>();
+        _gameSession = FindFirstObjectByType<GameSession>();
         if (_gameSession == null)
         {
             Debug.LogError("PrototypeGameSessionが見つかりません。");
