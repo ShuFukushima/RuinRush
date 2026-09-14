@@ -3,7 +3,17 @@ guid: e1a99a8e574bcdb44b541abc01103c1c
 ModelImporter:
   serializedVersion: 24200
   internalIDToNameTable: []
-  externalObjects: {}
+  externalObjects:
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: SLOT_Body_Main
+    second: {fileID: 2100000, guid: 9cf4c5cbcede7be44afd6143ea5a8aa7, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: SLOT_Metal
+    second: {fileID: 2100000, guid: 8896cd3631fb3324f85c3c11ae7af626, type: 2}
   materials:
     materialImportMode: 2
     materialName: 0
