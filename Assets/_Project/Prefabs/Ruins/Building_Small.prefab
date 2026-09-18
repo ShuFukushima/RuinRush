@@ -191,8 +191,9 @@ MonoBehaviour:
   _upgradeMaxTorqueItem: {fileID: 4690898888433504167, guid: c4ae6a8bbec8db64ba3cb8e1cfa1d7d3, type: 3}
   _fragmentObj: {fileID: 360498637114925582, guid: 4ef9512e816ba694cacdd5e826c2f5b4, type: 3}
   _particle: {fileID: 7138763762151677052, guid: d9f92af9505266149b073c5108c01ba6, type: 3}
-  _cameraShake: {fileID: 0}
   _shakeIntensity: 0.2
+  _particleSpawnSpeed: 5
+  _destroyTime: 10
   _explosionForce: 200
   _explosionRadius: 30
 --- !u!54 &1143133778980676359
@@ -242,7 +243,6 @@ MonoBehaviour:
   - {fileID: 0}
   - {fileID: 0}
   - {fileID: 0}
-  _materialName: RuinFeedback_Small
   _breakingSpeed: 0
   _maximumLmnInt: 30
   _glowCurve:
@@ -278,7 +278,6 @@ MonoBehaviour:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
-  _matIndex: 5
 --- !u!1001 &4751183517524002175
 PrefabInstance:
   m_ObjectHideFlags: 0

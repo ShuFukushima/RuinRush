@@ -263,6 +263,8 @@ MonoBehaviour:
   _fragmentObj: {fileID: 992106713089316838, guid: 1c4f618026278d844a9fc9563d0db883, type: 3}
   _particle: {fileID: 7138763762151677052, guid: d9f92af9505266149b073c5108c01ba6, type: 3}
   _shakeIntensity: 0.3
+  _particleSpawnSpeed: 60
+  _destroyTime: 10
   _explosionForce: 20
   _explosionRadius: 30
 --- !u!114 &8323061890747407114

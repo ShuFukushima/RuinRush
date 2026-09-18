@@ -10,6 +10,7 @@ public class BreakableObject : MonoBehaviour
     [SerializeField] private GameObject _fragmentObj;   // 破壊された際に生成される破片
     [SerializeField] private GameObject _particle;      // 破壊された際に生成される爆発パーティクル
     [SerializeField] private float _shakeIntensity;     // 破壊された際に揺らす強さ
+    [SerializeField] private float _destroyTime;        // 破片オブジェクトが破棄される時間
 
     [SerializeField] private float _explosionForce = 20f;
     [SerializeField] private float _explosionRadius = 1f;
@@ -30,24 +31,41 @@ public class BreakableObject : MonoBehaviour
     }
     
 
-    // プレイヤーと衝突した際に破壊速度かどうかを判定
+    // プレイヤー・破片と衝突した際に破壊速度かどうかを判定
     private void OnTriggerEnter(Collider other)
     {
-        // プレイヤーかどうか判定
-        if (!other.CompareTag("Player")) return;
+        // プレイヤー・廃墟かどうか判定
+        if (!other.CompareTag("Player") && !other.CompareTag("Fragment")) return;
 
-        // プレイヤーの速度を取得
-        CarController player = other.gameObject.GetComponent<CarController>();
-        float playerSpeed = player.GetPlayerCurrentSpeed();
+        // 変数準備
+        float speed;
+        Vector3 collisionPoint = Vector3.zero;
 
-        // 接触した瞬間のプレイヤーの座標を取得
-        Vector3 playerCollisionPoint = player.transform.position;
+        // プレイヤーの場合
+        if (other.CompareTag("Player"))
+        {
+            // プレイヤーの速度を取得
+            CarController player = other.gameObject.GetComponent<CarController>();
+            speed = player.GetPlayerCurrentSpeed();
+
+            // 接触した瞬間のプレイヤーの座標を取得
+            collisionPoint = player.transform.position;
+        }
+        else
+        {
+            // 破片の速度を取得
+            speed = other.gameObject.GetComponent<Rigidbody>().linearVelocity.magnitude * 3.6f;
+
+            // 接触した瞬間の破片の座標を取得
+            collisionPoint = other.transform.position;
+        }
+
 
         // 一定速度以上なら破壊、一定速度未満なら破壊しない
-        if (playerSpeed >= _breakingSpeed)
+        if (speed >= _breakingSpeed)
         {
             Debug.Log("必要破壊速度以上なので破壊します。");
-            Break(playerCollisionPoint);
+            Break(collisionPoint);
         }
         else
         {
@@ -115,6 +133,9 @@ public class BreakableObject : MonoBehaviour
         // 生成した破片オブジェクトを取得する
         GameObject brokenBuilding = Instantiate(_fragmentObj, gameObject.transform.position, transform.rotation);
 
+        // 一定時間で破棄する
+        Destroy(brokenBuilding, _destroyTime);
+
         // 生成した破片オブジェクトの子オブジェクトのRigidbody をすべて取得する
         Rigidbody[] brokenFragments = brokenBuilding.GetComponentsInChildren<Rigidbody>();
 
@@ -124,6 +145,13 @@ public class BreakableObject : MonoBehaviour
             // 爆発力をプレイヤーとビルの接触点（ワールド座標）に加える
             // 破片に加える力の大きさ・半径は後で入力できるようにする
             brokenFragments[i].AddExplosionForce(_explosionForce, collisionPoint, _explosionRadius, 0f, ForceMode.Impulse);
+
+            // 破片オブジェクトからパーティクルを出す
+            Transform particle = brokenFragments[i].transform.GetChild(0);
+            GameObject particleObj = particle.gameObject;
+            particleObj.SetActive(true);
+
+
         }
 
     }

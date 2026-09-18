@@ -12,6 +12,8 @@ public class RuinSpawner : MonoBehaviour
     [SerializeField] private int _mediumRatio;
     [SerializeField] private int _largeRatio;
 
+    [SerializeField] private float _gizmoRadius = 1.0f;
+
 
     private void Start()
     {
@@ -128,6 +130,19 @@ public class RuinSpawner : MonoBehaviour
 
             // 抽選袋から生成された要素数の廃墟を削除
             ruinBag.Remove(ruinBag[randomIndex]);
+        }
+    }
+
+    /// <summary>
+    /// シーン上で生成ポイントが見やすくなるようにする処理
+    /// </summary>
+    private void OnDrawGizmos()
+    {
+        Gizmos.color = Color.yellow;
+
+        foreach (Transform point in transform)
+        {
+            Gizmos.DrawSphere(point.position, _gizmoRadius);
         }
     }
 
