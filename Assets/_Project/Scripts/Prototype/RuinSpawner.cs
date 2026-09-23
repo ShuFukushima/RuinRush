@@ -113,7 +113,6 @@ public class RuinSpawner : MonoBehaviour
             float zRotOffset = (float)Random.Range(-20, 20);
 
             // x、zの数値にしたがって、高さを調整する
-            // 単純に増減するか…
             float yPosOffset;
             if(Mathf.Abs(xRotOffset) > Mathf.Abs(zRotOffset))
             {

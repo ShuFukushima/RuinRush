@@ -6,10 +6,8 @@ public class RuinFeedback : MonoBehaviour
     private BreakableObject _breakableObject;  // 破壊可能速度を参照する
     private CarController _player;
 
+    private List<Material> _materials = new List<Material>();
 
-    [SerializeField] private Material[] _materials = new Material[3];
-
-    [SerializeField] private Renderer[] _renderers = new Renderer[3];
     [SerializeField] private float _breakingSpeed;
     [SerializeField] private float _maximumLmnInt;  // 最大発光強度
     [SerializeField] private AnimationCurve _glowCurve;
@@ -22,32 +20,17 @@ public class RuinFeedback : MonoBehaviour
 
         _player = GameObject.FindWithTag("Player").GetComponent<CarController>();
 
-        // Awake 内で明示的に初期化（フィールドでの初期化は、オブジェクトをインスタンシエイトで生成した際は何故だか無効になる）
-        _materials = new Material[3];
-        _renderers = new Renderer[3];
+        Renderer[] renderers = GetComponentsInChildren<Renderer>();
 
-
-        // 孫オブジェクトを取得
-        List<Transform> grandchildren = GetAllGrandchildren(this.transform);
-
-        for(int i = 0; i < grandchildren.Count; i++)
+        foreach (Renderer renderer in renderers)
         {
-            // 孫オブジェクトのレンダラーを取得
-            _renderers[i] = grandchildren[i].GetComponent<Renderer>();
-
-            // 孫オブジェクトの指定した要素数のマテリアルを取得
-            Material[] childMaterials = _renderers[i].materials;
-
-            // マテリアルプロパティで照合する
-            for(int j = 0; j < childMaterials.Length; j++)
+            foreach (Material material in renderer.materials)
             {
-                if (childMaterials[j].HasProperty("_GlowStrength"))
+                if (material.HasProperty("_GlowStrength"))
                 {
-                    _materials[i] = childMaterials[j];
-                    break;
+                    _materials.Add(material);
                 }
             }
-
         }
 
     }
@@ -67,32 +50,10 @@ public class RuinFeedback : MonoBehaviour
         emissionRate *= _maximumLmnInt;
 
         // SetFloat("_GlowStrength", 値);
-        for(int i = 0; i < _materials.Length; i++)
+        foreach (Material material in _materials)
         {
-            _materials[i].SetFloat("_GlowStrength", emissionRate);
-        }
-        
-    }
-
-    /// <summary>
-    /// 孫オブジェクトを返すメソッド
-    /// </summary>
-    /// <param name="parent"></param>
-    /// <returns></returns>
-    List<Transform> GetAllGrandchildren(Transform parent)
-    {
-        List<Transform> result = new List<Transform>();
-
-        // 子オブジェクトをループ
-        foreach (Transform child in parent)
-        {
-            // 孫オブジェクトをループ
-            foreach (Transform grandchild in child)
-            {
-                result.Add(grandchild);
-            }
+            material.SetFloat("_GlowStrength", emissionRate);
         }
 
-        return result;
     }
 }

@@ -11,8 +11,10 @@ public class BreakableObject : MonoBehaviour
     [SerializeField] private GameObject _particle;      // 破壊された際に生成される爆発パーティクル
     [SerializeField] private float _shakeIntensity;     // 破壊された際に揺らす強さ
     [SerializeField] private float _destroyTime;        // 破片オブジェクトが破棄される時間
+    [SerializeField] private AudioClip _audioClip;
 
     [SerializeField] private float _explosionForce = 20f;
+    [SerializeField] private float _expVariable = 0.00957f;
     [SerializeField] private float _explosionRadius = 1f;
     private GameSession _gameSession; // 破壊された際にスコア加算を行う
     private CameraShake _cameraShake;   // 破壊された際にカメラを揺らす
@@ -40,6 +42,7 @@ public class BreakableObject : MonoBehaviour
         // 変数準備
         float speed;
         Vector3 collisionPoint = Vector3.zero;
+        float mass;
 
         // プレイヤーの場合
         if (other.CompareTag("Player"))
@@ -50,6 +53,9 @@ public class BreakableObject : MonoBehaviour
 
             // 接触した瞬間のプレイヤーの座標を取得
             collisionPoint = player.transform.position;
+
+            // プレイヤーの質量を取得
+            mass = other.gameObject.GetComponent<Rigidbody>().mass;
         }
         else
         {
@@ -58,6 +64,9 @@ public class BreakableObject : MonoBehaviour
 
             // 接触した瞬間の破片の座標を取得
             collisionPoint = other.transform.position;
+
+            // 破片の質量を取得
+            mass = other.gameObject.GetComponent<Rigidbody>().mass;
         }
 
 
@@ -65,7 +74,7 @@ public class BreakableObject : MonoBehaviour
         if (speed >= _breakingSpeed)
         {
             Debug.Log("必要破壊速度以上なので破壊します。");
-            Break(collisionPoint);
+            Break(collisionPoint, speed, mass);
         }
         else
         {
@@ -80,7 +89,7 @@ public class BreakableObject : MonoBehaviour
     /// 建物を破壊する処理
     /// </summary>
     /// <param name="collisionPoint"></param>
-    private void Break(Vector3 collisionPoint)
+    private void Break(Vector3 collisionPoint , float speed, float mass)
     {
         // スコアを加える
         _gameSession.AddScore(_scoreValue);
@@ -88,9 +97,11 @@ public class BreakableObject : MonoBehaviour
         // Breakは破壊する際の処理まとめになるので、この中でアイテムの生成を呼ぶ
         // 廃墟は階層としては下の方のため、今回はデリゲートは使わない（使うととんでもないことになるから）
         SpawnUpgradeItem();                 // アイテムを生成
-        SpawnFragmentObj(collisionPoint);   // 破片を生成
+        SpawnFragmentObj(collisionPoint, speed, mass);   // 破片を生成
         SpawnParticle(collisionPoint);      // パーティクルを生成
         _cameraShake.StartShake(_shakeIntensity);
+        // 音を鳴らす
+        AudioSource.PlayClipAtPoint(_audioClip, transform.position, 4f);
 
         // 最後に自身を破壊する
         Destroy(gameObject);
@@ -113,7 +124,7 @@ public class BreakableObject : MonoBehaviour
         }
 
         // アイテムを生成する
-        Instantiate(upgradeItem, gameObject.transform.position, Quaternion.identity);
+        Instantiate(upgradeItem, gameObject.transform.position + new Vector3(0f, 10f, 0f), Quaternion.identity);
     }
 
     /// <summary>
@@ -128,7 +139,7 @@ public class BreakableObject : MonoBehaviour
     /// <summary>
     /// 破片を生成する
     /// </summary>
-    private void SpawnFragmentObj(Vector3 collisionPoint)
+    private void SpawnFragmentObj(Vector3 collisionPoint, float speed, float mass)
     {
         // 生成した破片オブジェクトを取得する
         GameObject brokenBuilding = Instantiate(_fragmentObj, gameObject.transform.position, transform.rotation);
@@ -139,19 +150,15 @@ public class BreakableObject : MonoBehaviour
         // 生成した破片オブジェクトの子オブジェクトのRigidbody をすべて取得する
         Rigidbody[] brokenFragments = brokenBuilding.GetComponentsInChildren<Rigidbody>();
 
+        // 加える力を計算する
+        float force = speed * mass * 0.00957f;
+
         // 0～個数-1までの子を順番に配列に格納
         for (var i = 0; i < brokenFragments.Length; ++i)
         {
             // 爆発力をプレイヤーとビルの接触点（ワールド座標）に加える
             // 破片に加える力の大きさ・半径は後で入力できるようにする
-            brokenFragments[i].AddExplosionForce(_explosionForce, collisionPoint, _explosionRadius, 0f, ForceMode.Impulse);
-
-            // 破片オブジェクトからパーティクルを出す
-            Transform particle = brokenFragments[i].transform.GetChild(0);
-            GameObject particleObj = particle.gameObject;
-            particleObj.SetActive(true);
-
-
+            brokenFragments[i].AddExplosionForce(force, collisionPoint, _explosionRadius, 0f, ForceMode.Impulse);
         }
 
     }

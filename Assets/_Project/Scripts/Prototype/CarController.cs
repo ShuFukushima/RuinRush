@@ -16,7 +16,7 @@ public class CarController : MonoBehaviour
     [SerializeField] private WheelCollider _fL, _fR, _rL, _rR;  // 4輪分のWheelCollider
     [SerializeField] private Drive _drive;                      // 駆動方式を管理
 
-    [SerializeField] private GameSession _gameSession; // 現在のゲーム進行情報を取得する
+    [SerializeField] private GameSession _gameSession = null; // 現在のゲーム進行情報を取得する
 
     [SerializeField] private float _baseMaxSpeed = 40f;   // 最高速の初期値
     [SerializeField] private float _baseMaxTorque = 1000f;
@@ -28,39 +28,36 @@ public class CarController : MonoBehaviour
     [SerializeField] private float _frontTrack;
 
     [SerializeField] private Rigidbody _rb;                 // 車のリジッドボディ
+    [SerializeField] private AudioSource _audioSource;      // エンジン音用 
 
     private void Start()
     {
         _gameSession = FindAnyObjectByType<GameSession>();
 
-        // エラー処理
-        if (_gameSession == null)
+        if (_gameSession != null)
         {
-            Debug.LogError("PrototypeGameSessionが見つかりません。");
+            
+            _audioSource = GetComponent<AudioSource>();
+
+            // 最高速の初期値を設定
+            _currentMaxSpeed = _baseMaxSpeed;
+            _currentMaxTorque = _baseMaxTorque;
         }
 
+        // エラー処理
+
         _rb = GetComponent<Rigidbody>();
-        if(_rb == null)
+        if (_rb == null)
         {
             Debug.LogError("車にRigidbodyを設定してください。");
         }
 
-        // 最高速の初期値を設定
-        _currentMaxSpeed = _baseMaxSpeed;
-        _currentMaxTorque = _baseMaxTorque;
     }
 
 
     private void Update()
     {
-        // ゲームセッション側の進行情報を基に、操作するかを判定
-        if(_gameSession.GetIsPlaying() == true)
-        {
-            Driving();
-            Steering();
-            Braking();
-        }
-        else
+        if( _gameSession == null )
         {
             _fL.motorTorque = 0f;
             _fR.motorTorque = 0f;
@@ -71,10 +68,37 @@ public class CarController : MonoBehaviour
             _fR.brakeTorque = _maxBrake;
             _rL.brakeTorque = _maxBrake;
             _rR.brakeTorque = _maxBrake;
+
+            Steering();
+        }
+        else
+        {
+            // ゲームセッション側の進行情報を基に、操作するかを判定
+            if (_gameSession._gameState == GameSession.GameState.Game)
+            {
+                Driving();
+                Steering();
+                Braking();
+            }
+            else
+            {
+                _fL.motorTorque = 0f;
+                _fR.motorTorque = 0f;
+                _rL.motorTorque = 0f;
+                _rR.motorTorque = 0f;
+
+                _fL.brakeTorque = _maxBrake;
+                _fR.brakeTorque = _maxBrake;
+                _rL.brakeTorque = _maxBrake;
+                _rR.brakeTorque = _maxBrake;
+            }
+
+            // 速度取得
+            GetPlayerCurrentSpeed();
+            // ピッチ変更
+            ChangeEnginePitch();
         }
 
-        // 速度取得
-        GetPlayerCurrentSpeed();
 
     }
 
@@ -115,6 +139,8 @@ public class CarController : MonoBehaviour
             _rL.motorTorque = 0f;
             _rR.motorTorque = 0f;
         }
+
+
         
 
     }
@@ -122,6 +148,9 @@ public class CarController : MonoBehaviour
     void Steering()
     {
         float steering = _steerAngle * Input.GetAxis("Horizontal");
+
+        if (_gameSession == null)
+            steering = 45f;
 
         // ほぼ直進なら左右とも0度
         if (Mathf.Abs(steering) < 0.01f)
@@ -181,13 +210,26 @@ public class CarController : MonoBehaviour
     public void IncreaseMaxSpeed(float addMaxSpeed)
     {
         // 現在の最高速度を更新
-        _currentMaxSpeed += addMaxSpeed;
+        if(_currentMaxSpeed < 250)
+            _currentMaxSpeed += addMaxSpeed;
     }
 
     public void IncreaseMaxTorque(float addMaxTorque)
     {
         // 現在のモータートルクを更新
         _currentMaxTorque += addMaxTorque;
+    }
+
+    /// <summary>
+    /// エンジン音を速度によって変化させる
+    /// </summary>
+    private void ChangeEnginePitch()
+    {
+        // 現在の最高速度を分母、現在の速度を分子にする
+        float enginepitch = _currentSpeed / _currentMaxSpeed;
+
+        // ピッチ変更（最小値1.5、最大値3）
+        _audioSource.pitch = (enginepitch + 1f) * 1.5f;
     }
 
     /// <summary>
@@ -200,5 +242,14 @@ public class CarController : MonoBehaviour
         _currentSpeed = _rb.linearVelocity.magnitude * 3.6f;
         
         return _currentSpeed;
+    }
+
+    /// <summary>
+    /// 現在の最高速度を返す
+    /// </summary>
+    /// <returns></returns>
+    public float GetPlayerCurrentMaxSpeed()
+    {
+        return _currentMaxSpeed;
     }
 }

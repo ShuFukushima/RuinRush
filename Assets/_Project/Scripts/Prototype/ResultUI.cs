@@ -9,6 +9,12 @@ public class ResultUI : MonoBehaviour
     private GameSession _gameSession;              // スコア・ゲームの進行状況を取得
     private bool _hasShownResult = false;                   // リザルトパネルを1回だけ表示させる
 
+    [Header("パネル移動用")]
+    public bool _isRanking = false;
+    public float _sliderSpeed = 5f;
+    [SerializeField] private RectTransform _scorePanel;
+    [SerializeField] private RectTransform _rankingPanel;
+
 
     private void Start()
     {
@@ -36,12 +42,14 @@ public class ResultUI : MonoBehaviour
     private void Update()
     {
         // 将来的にリトライ処理を整理するため、1つのメソッドにまとめる
-        if(_gameSession.GetIsPlaying() == false && _hasShownResult == false)
+        if(_gameSession._gameState == GameSession.GameState.Result && _hasShownResult == false)
         {
             ShowResult();
             _hasShownResult = true;
         }
-        
+
+        MovePanel();
+
     }
 
     /// <summary>
@@ -65,5 +73,59 @@ public class ResultUI : MonoBehaviour
     public void OnClickRetry()
     {
         SceneManager.LoadScene(SceneManager.GetActiveScene().name);
+    }
+
+    public void OnClickReturn()
+    {
+        SceneManager.LoadScene("Title");
+    }
+
+    // ボタンを押されたら移動させる
+    public void OnClickRanking()
+    {
+        if(_isRanking)
+            _isRanking = false;
+        else
+            _isRanking = true;
+    }
+
+    public void OnClickScore()
+    {
+        _isRanking = false;
+    }
+
+    private void MovePanel()
+    {
+        if (_isRanking)
+        {
+            if (_scorePanel.anchoredPosition.x > -800f)
+            {
+                // パネルを移動させる
+                _scorePanel.anchoredPosition += new Vector2(-_sliderSpeed, 0f) * Time.deltaTime;
+                _rankingPanel.anchoredPosition += new Vector2(-_sliderSpeed, 0f) * Time.deltaTime;
+            }
+            else if (_rankingPanel.anchoredPosition.x != 0f)
+            {
+                _scorePanel.anchoredPosition = new Vector2(-800f, 0f);
+                _rankingPanel.anchoredPosition = new Vector2(0f, 0f);
+            }
+        }
+        else
+        {
+            if (_rankingPanel.anchoredPosition.x < 800f)
+            {
+                // パネルを移動させる
+                _scorePanel.anchoredPosition -= new Vector2(-_sliderSpeed, 0f) * Time.deltaTime;
+                _rankingPanel.anchoredPosition -= new Vector2(-_sliderSpeed, 0f) * Time.deltaTime;
+            }
+            else if (_scorePanel.anchoredPosition.x != 0f)
+            {
+                _scorePanel.anchoredPosition = new Vector2(0f, 0f);
+                _rankingPanel.anchoredPosition = new Vector2(800f, 0f);
+            }
+
+        }
+
+
     }
 }
